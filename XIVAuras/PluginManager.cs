@@ -102,8 +102,9 @@ namespace XIVAuras
             finally
             {
                 ImGui.End();
-                ImGui.PopStyleVar(3);
             }
+
+            ImGui.PopStyleVar(3);
         }
 
         public void Edit(IConfigurable config)
