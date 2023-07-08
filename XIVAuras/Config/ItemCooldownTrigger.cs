@@ -100,8 +100,6 @@ namespace XIVAuras.Config
                 {
                     ActionHelpers.FindItemEntries(_triggerNameInput).ForEach(t => AddTriggerData(t));
                 }
-
-                _triggerNameInput = this.TriggerName;
             }
 
             DrawHelpers.DrawSpacing(1);

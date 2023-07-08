@@ -150,9 +150,8 @@ namespace XIVAuras.Config
                         AddTriggerData(triggerData);
                     }
                 }
-
-                _triggerNameInput = this.TriggerName;
             }
+
             ImGui.Checkbox("Use Adjusted Action", ref this.Adjust);
             if (ImGui.IsItemHovered())
             {

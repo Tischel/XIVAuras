@@ -128,8 +128,6 @@ namespace XIVAuras.Config
                 {
                     StatusHelpers.FindStatusEntries(_triggerNameInput).ForEach(t => AddTriggerData(t));
                 }
-
-                _triggerNameInput = this.TriggerName;
             }
 
             ImGui.Checkbox("Only Mine", ref this.OnlyMine);
