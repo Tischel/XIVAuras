@@ -25,6 +25,8 @@ namespace XIVAuras.Config
         public bool HideWhilePerforming = false;
         public bool HideInGoldenSaucer = false;
         public bool HideWhenSheathed = false;
+        public bool IgnoreInCombat = false;
+        public bool IgnoreInDuty = false;
         public bool Clip = false;
 
         public bool HideIfLevel = false;
@@ -79,7 +81,9 @@ namespace XIVAuras.Config
                 return false;
             }
 
-            if (this.HideWhenSheathed && !CharacterState.IsWeaponDrawn())
+            if (this.HideWhenSheathed && !CharacterState.IsWeaponDrawn()
+                && (!this.IgnoreInCombat || (this.IgnoreInCombat && !CharacterState.IsInCombat()))
+                && (!this.IgnoreInDuty) || (this.IgnoreInDuty && !CharacterState.IsInDuty()))
             {
                 return false;
             }
@@ -106,6 +110,17 @@ namespace XIVAuras.Config
                 ImGui.Checkbox("Hide While Performing", ref this.HideWhilePerforming);
                 ImGui.Checkbox("Hide In Golden Saucer", ref this.HideInGoldenSaucer);
                 ImGui.Checkbox("Hide While Weapon Sheathed", ref this.HideWhenSheathed);
+                if (this.HideWhenSheathed)
+                {
+                    DrawHelpers.DrawNestIndicator(1);
+                    ImGui.Checkbox("Ignore Sheathed status in Combat", ref this.IgnoreInCombat);
+                    if (ImGui.IsItemHovered()) { ImGui.SetTooltip("Show when weapon is sheathed during combat."); }
+
+                    DrawHelpers.DrawNestIndicator(1);
+                    ImGui.Checkbox("Ignore Sheathed status in Duty", ref this.IgnoreInDuty);
+                    if (ImGui.IsItemHovered()) { ImGui.SetTooltip("Show when weapon is sheathed in a duty."); }
+                }
+                else { this.IgnoreInCombat = false; this.IgnoreInDuty = false; }
 
                 DrawHelpers.DrawSpacing();
                 ImGui.Checkbox("Hide if Level", ref this.HideIfLevel);
